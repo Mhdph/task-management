@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
+    "@heroicons/react": "^1.0.6",
     "@prisma/client": "^3.14.0",
     "@types/micro-cors": "^0.1.2",
     "apollo-server-micro": "^3.8.2",
