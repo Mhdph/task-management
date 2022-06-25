@@ -22,7 +22,7 @@ const board: React.FC<boardProps> = () => {
       console.log(data);
     },
   });
-  const section: Array<String> = ["To Do", "In Progress", "Review", "Done"];
+  const sections: Array<String> = ["To Do", "In Progress", "Review", "Done"];
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>Error</p>;
@@ -31,14 +31,14 @@ const board: React.FC<boardProps> = () => {
     <div>
       <Header />
       <div className="">
-        {section.map((section: String, index: number) => {
+        {sections.map((section: String, index: number) => {
           let filteredData: Array<Task> = data
             ? data.task.filter((task: Task) => {
                 return task.status === section;
               })
             : [];
           return (
-            <BoardSection titile="To Do" tasks={filteredData}></BoardSection>
+            <BoardSection title={section} tasks={filteredData}></BoardSection>
           );
         })}
       </div>

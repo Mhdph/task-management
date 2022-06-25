@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskCom from "./TaskCom";
 import { PlusIcon } from "@heroicons/react/solid";
+import AddTaskModal from "../components/AddTaskModal";
+import { title } from "process";
+
 type BoardSectionProps = {
-  titile: string;
+  title: String;
   tasks: Array<Task>;
 };
 
-const BoardSection: React.FC<BoardSectionProps> = ({ titile, tasks }) => {
+const BoardSection: React.FC<BoardSectionProps> = ({ title, tasks }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleclose = () => {
+    setShowModal(false);
+  };
+
+  const handleShow = () => {
+    setShowModal(true);
+  };
   return (
     <div>
       {tasks &&
@@ -26,6 +38,19 @@ const BoardSection: React.FC<BoardSectionProps> = ({ titile, tasks }) => {
           Add Task
         </button>
       )}
+      {tasks.length === 0 && (
+        <div>
+          <button onClick={handleShow}>
+            <PlusIcon />
+            Add Task
+          </button>
+        </div>
+      )}
+      <AddTaskModal
+        boardCategory={title}
+        showModal={showModal}
+        handleClose={handleclose}
+      />
     </div>
   );
 };
