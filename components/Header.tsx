@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { TbMessages } from "react-icons/tb";
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -6,9 +6,18 @@ import { BiHelpCircle, BiUser } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { BsGrid } from "react-icons/bs";
 import { TbPuzzle } from "react-icons/tb";
+import { useSession, signOut } from "next-auth/react";
 type HeaderProps = {};
 
 const Header: React.FC<HeaderProps> = () => {
+  const [name, setName] = useState("");
+  const { data: session } = useSession();
+  useEffect(() => {
+    if (session) {
+      setName(session.user.name);
+    }
+  }, [session]);
+
   const [show, setShow] = useState<HeaderProps | null>(null);
   const [profile, setProfile] = useState(false);
   const [search, setSearch] = useState(false);
